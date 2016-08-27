@@ -1,0 +1,22 @@
+Dear FF CSR,
+
+
+The cleaning activity for the data collection run for FF Order# <<FFOrderNo>> / Pull sequence# <<PullSequenceNO>> was unsuccessful.
+
+It is advisable that you please clear data download directory manually before initiating the next data pull run.
+
+Customer Support 
+
+Finfort Infotech LLP 
+
+Address: # 239, First Floor, 18th Main Road, 6th Block, 
+ 
+Koramangala Layout, Bangalore-560 095 
+
+Timings: Mon - Fri - 9am - 6pm 
+
+Sat - 9am - 2pm 
+ 
+Email: customersupport@finfort.ind.in 
+
+Phone: 91 80 41641666;

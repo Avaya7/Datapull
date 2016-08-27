@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry excluding="resources/" kind="src" path="src"/>
+	<classpathentry kind="src" path="src/resources"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+	<classpathentry kind="lib" path="Jars/selenium-server-standalone-2.52.0.jar"/>
+	<classpathentry kind="lib" path="Jars/zip4j_1.3.2.jar"/>
+	<classpathentry kind="lib" path="Jars/log4j-1.2.15.jar"/>
+	<classpathentry kind="lib" path="Jars/json-simple.jar"/>
+	<classpathentry kind="lib" path="Jars/mail.jar"/>
+	<classpathentry kind="lib" path="Jars/httpasyncclient-4.0.2.jar"/>
+	<classpathentry kind="lib" path="Jars/httpclient-4.3.6.jar"/>
+	<classpathentry kind="lib" path="Jars/httpcore-osgi-4.3.jar"/>
+	<classpathentry kind="lib" path="Jars/httpmime-4.3.6.jar"/>
+	<classpathentry kind="lib" path="Jars/json-20140107.jar"/>
+	<classpathentry kind="lib" path="Jars/unirest-java-1.4.9.jar"/>
+	<classpathentry kind="lib" path="Jars/google-api-client-1.20.0.jar"/>
+	<classpathentry kind="lib" path="Jars/google-api-services-gmail-v1-rev29-1.20.0.jar"/>
+	<classpathentry kind="lib" path="Jars/google-http-client-1.20.0.jar"/>
+	<classpathentry kind="lib" path="Jars/google-http-client-jackson2-1.20.0.jar"/>
+	<classpathentry kind="lib" path="Jars/google-oauth-client-1.20.0.jar"/>
+	<classpathentry kind="lib" path="Jars/google-oauth-client-1.7.0-beta.jar"/>
+	<classpathentry kind="lib" path="Jars/google-oauth-client-java6-1.20.0.jar"/>
+	<classpathentry kind="lib" path="Jars/google-oauth-client-jetty-1.20.0.jar"/>
+	<classpathentry kind="lib" path="Jars/guava-19.0-rc1.jar"/>
+	<classpathentry kind="lib" path="Jars/jackson-0.8.jar"/>
+	<classpathentry kind="lib" path="Jars/jetty-7.0.0.pre5.jar"/>
+	<classpathentry kind="lib" path="Jars/jetty-util-7.0.0.pre5.jar"/>
+	<classpathentry kind="lib" path="Jars/mail-1.4.jar"/>
+	<classpathentry kind="lib" path="Jars/servlet-api-2.5.jar"/>
+	<classpathentry kind="lib" path="Jars/com.fasterxml.jackson.core.jar"/>
+	<classpathentry kind="lib" path="Jars/slf4j-log4j12-1.7.21.jar"/>
+	<classpathentry kind="lib" path="Jars/google-api-services-drive-v2-rev223-1.22.0.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

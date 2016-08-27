@@ -1,0 +1,11 @@
+Please enter your Login Credentials (UserName, Password, etc.)
+
+FinFort does NOT have access to your Login Credentials.  
+
+The software will download all relevant information from the website,
+
+but will not make any changes to your settings or submit anything on your behalf.
+
+A copy of the information downloaded will be sent to the email you provided earlier.
+
+Please look for an email from customersupport@finfort.ind.in;

@@ -1,0 +1,46 @@
+The use of this Data Extraction Application and the features provided by FinFort Infotech LLP(FinFort) shall 
+be governed by the following Terms of Use (Agreement).
+
+You as an individual or as a single user on behalf of the organization you represent agree that You
+have read and agree to be bound by the terms and conditions of this Agreement. If You do not
+unconditionally agree to all of the terms and conditions of this Agreement You are requested
+not to use the Application or upload / download content using the Application.
+
+This Application is the property of FinFort and is protected by Intellectual Property and copyright laws. 
+FinFort grants You a non-exclusive, non-transferable, limited right to access to this Application for Your
+personal and non-commercial use. You shall not modify, copy, distribute, transmit, display, perform,
+reproduce, publish, license, create derivative works from, transfer, or sell any information, software,
+products or services obtained from this Application.
+
+FinFort is providing this Application to You only as a convenience to provide Your Information to the
+Lender. To extract Your Information, You will be directed to an external application or portal
+maintained by an entity other than FinFort. If You agree to key in your credentials and password for
+this external application or portal, You do so at Your own risk and it is Your responsibility to take all
+protective measures to guard against viruses or any other destructive elements. FinFort does NOT
+have access to your Login Credentials. There is no warranty of any kind, express or implied,
+regarding third party application or portal and its content.
+
+This Application and the Content on this Application are provided as is without any representation or
+warranty, express or implied. In spite of FinFort best endeavors, there is no warranty on behalf of
+FinFort that this Application will be free of any computer viruses.
+
+In no event shall FinFort be liable to any entity for any direct, indirect, consequential or other damages
+including, without limitation, any lost profits, business interruption, loss of information etc. that are
+related to the use of, or the inability to use, the content and functionality on this Application or any
+linked Application.
+
+FinFort does not claim ownership of the content You provide and FinFort will retain and use the same
+for providing the credit evaluation reports for the Lender. By inputting and submitting Your content
+You are granting FinFort permission to use Your content in connection with the operation of their
+businesses. FinFort may aggregate or anonymize such information for business, peer and other
+business user level analytics. You hereby acknowledge and agree that no compensation shall be paid
+or no future commercial consideration will accrue with respect to the use of Your content by FinFort.
+
+If You have reason to believe that any Content on the Application violates the limits of Acceptable
+Use, please contact Us by email at info@finfort.ind.in
+
+You agree to indemnify and hold harmless FinFort from any claim, cost, expense, judgment or other
+loss relating to Your use of this Application in any manner including any action You take which is in
+violation of the terms and conditions of these Terms of Use and against any applicable law.
+
+This Agreement shall be governed by the laws of India.

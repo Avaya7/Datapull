@@ -1,0 +1,131 @@
+{
+	"configFileName": "DataPullConfig",
+	"description": "Configuration File for Data Pulls",
+
+	"dataPullsOption": ["IncTax", "Vodafone", "ReliancePower","Mahadiscom","airtel","MTNL","BSNL","ReliancePostPaid","BSNLLandline","IdeaPostpaid","Best"],
+	"dataPullToRun": "IdeaPostpaid",
+
+	"IncTax": {
+		"ZoomInPercent": "120",
+		"YearsToPullData": ["2013", "2014", "all"]
+	},
+	"Vodafone": {
+		"ZoomInPercent": "120"
+	},
+	"ReliancePower": {
+		"ZoomInPercent": "120"
+	},
+	"Mahadiscom": {
+		"ZoomInPercent": "120"
+	},
+	"airtel": {
+		"ZoomInPercent": "120"
+	},
+	"MTNL": {
+		"ZoomInPercent": "120"
+	},
+	 "BSNL": {
+		"ZoomInPercent": "120"
+	},
+	 "IdeaPostpaid": {
+		"ZoomInPercent": "120"
+	},
+	"Best": {
+		"ZoomInPercent": "120"
+	},
+	"ReliancePostPaid": {
+		"ZoomInPercent": "120"
+	},
+	"BSNLLandline": {
+		"ZoomInPercent": "120"
+	},
+
+
+	"BasicInfo": {
+		"TimeToDisplayPostLogoutScreenInSeconds": "5000",
+		"baseDir": "C:\\PullDocs\\",
+		"timeDelaybetweenClicksInMilliSeconds": "500"
+	},
+
+	"OtpAndSmsConfig": {
+		"OTPBasedT&CReconfirmationOptions": ["Yes", "NO"],
+		"OTPBasedT&CReconfirmation": "NO",
+		"maxOTPRetries": "3",
+		"otpAPIKey": "a70b1c78-173a-11e6-b006-00163ef91450",
+		"OtpProviderURL": "http://2factor.in/API/V1/",
+		"TransactionSMSSenderID": "FIFORT",
+		"TransactionSMSTemplate": "FFZIPPASSWORD"
+	},
+
+	"DriveConfig": {
+		"driveAPIJSON": "DriveClientSimplify.json",
+		"driveTokenJSON": "drive-java-Token.json",
+		"driveBaseDir": "FinfortDataPull\\FFData"
+	},
+
+	"MailConfig": {
+		"mailAPIJSON": "EmailClient.json",
+		"mailTokenJSON": "gmail-java-Token.json",
+		"fromEmail": "me",
+		"ccEmails": "lendersupport@finfort.ind.in",
+		"zipPasswordPrefix": "finfort",
+		"passwordDeliveryOptions": ["SMS", "Email", "BothEmailandSMS"],
+		"passwordDeliveryMode": "Email"
+	},
+
+	"TermsAndCondition": {
+		"termsAndcondition_popup_textSize": "16",
+		"termsAndcondition_popup_height": "500",
+		"termsAndcondition_popup_width": "500",
+		"termsAndCondition_popup_FontName": "TimesNew"
+	},
+
+	"PopupConfig": {
+		"userInfoPopupFontName": "TimesNew",
+		"userInfoPopupFontSize": "16"
+	},
+
+	"BorrowerDetails": {
+		"UserName": "Avaya",
+		"MailID": "Vswain57@gmail.com",
+		"PhoneNumber": "8908251877",
+		"FFOrderNo": "FF001",
+		"PullSequenceNO": "MD001",
+		"FFProductCode": "MA001"
+	},
+
+	"FFCustomerSupportDetails": {
+		"FFOpsCustomerSupportPerson": "SupportPerson1",
+		"FFOpsCustomerSupportPersonEmailID": "customersupport@finfort.ind.in"
+	},
+
+	"VersionInfo": {
+		"Vodafone_Version": "2.3.7",
+		"IT_Version": "2.3.7",
+		"Reliance_Version": "2.3.7",
+		"Mahadiscom_Version": "2.3.7",
+		"airtel_Version": "2.3.7",
+		"MTNL_Version": "2.3.7",
+		"BSNL_Version": "2.3.7",
+		"ReliancePostPaid_Version": "2.3.7",
+		"BSNLLandline_Version": "2.3.7", 
+		"IdeaPostpaid_Version": "2.3.7",
+        "Best_Version": "2.3.7"
+
+
+	},
+
+	"UserUnderstandableName": {
+		"IncTax": "IncomeTax",
+		"Vodafone": "Vodafone",
+		"ReliancePower": "ReliancePower",
+		"Mahadiscom": "Mahadiscom",
+		"airtel": "Airtel",
+		"MTNL": "MTNL",
+		"BSNL": "BSNL",
+		"ReliancePostPaid":"ReliancePostPaid",
+		"BSNLLandline":"BSNLLandline",
+		"IdeaPostpaid": "IdeaPostpaid",
+		"Best": "Best"
+	}
+}

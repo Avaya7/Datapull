@@ -1,0 +1,395 @@
+package Telecom;
+
+import gMailAPI.gMail;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+
+import javax.swing.JFrame;
+
+import org.apache.log4j.Logger;
+import org.apache.log4j.MDC;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.ParseException;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import com.google.api.services.drive.Drive;
+
+import Generic.Generic;
+
+public class BSNL  extends Generic {
+	static String strloginurl="https://portal2.bsnl.in/myportal/authorize.do";
+	static String strDashboardDetails="//h3[contains(text(),'Dashboard') and small[contains(text(),'Welcome to BSNL Payment Portal')]]";
+	static String strClickViewBillsLink="//a[span[text()='View Bills']]";
+	static String strClickGSMMobileLink="//a[contains(text(),'GSM Mobile')]";
+	//static String strSelectBillItem="//div[@id='multibilldetails']/div[2]";
+	static String strInvalidData="//*[@id='msg' and contains(text(),'Your login rejected, Pl check your user_name/password.')]";
+	static String strWrongPasswrdMessage="//*[@id='msg' and contains(text(),'Invalid Password. Please try Password Reset...')]";
+	//static String strClickDownloadBtn="//*[@id='download']";
+	static String strLoginBtn="//button[@id='login-btn']";
+	static String strlogoutBtn="//a[@class='dropdown-toggle']//following-sibling::ul//a[contains(text()[2],'Log Out')]";
+	
+	//Implicit Waits
+		static int intMinWait=5;
+		static int intMedWait=10;
+		static int intMaxWait=1000;
+		static String newline = System.getProperty("line.separator");
+		static String googleDrivePath;
+		
+		
+public static boolean dlBSNLBill(FirefoxDriver driver,String strBaseDir, Logger log,String strUserName, String strFForderNumber, String seqNo){
+			MDC.put("EventType","DataDownloadStart");
+			MDC.put("EventData","Success");
+			log.info("Data dwonload started");
+				
+			ImplicitWait(driver);
+			WebDriverWait wait = new WebDriverWait(driver, intMaxWait);
+			try {
+				waitTillElementIsPresent(driver,strLoginBtn , intMaxWait);
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		    String arrMessage[] = readFile("./InputMessages/LoginMessage.txt").split("#newLine#");
+		    String strMessage = "";
+		    for(int intLoop=0;intLoop<arrMessage.length;intLoop++){
+		    	if(strMessage==""){
+		    		strMessage =arrMessage[intLoop];
+		    		}else{
+		        	   strMessage =strMessage+ newline+arrMessage[intLoop];
+		        	   }
+		    	}
+		    showPopup(strMessage,driver,log, strUserName, strFForderNumber, seqNo);
+		    
+				
+			boolean blnFlag= true;
+		    ImplicitWait(driver, intMinWait);
+		    int intCount=0;
+		   
+		    ImplicitWait(driver,intMedWait);
+		    
+		    while(blnFlag){
+		    	try{
+		    		    if((driver.findElements(By.xpath(strInvalidData)).size()>0 || driver.findElements(By.xpath(strWrongPasswrdMessage)).size()>0  )){
+		            	showPopup("Invalid login crendentials entered. The page will be reloaded now.");
+		  				driver.get(strloginurl);
+		  				driver.manage().deleteAllCookies();
+		  		        
+		  				intCount ++;
+		  				if(intCount>=3){
+		  					showPopup("Maximum number of allowed attempt over. The Utility will exit now.");
+				  			driver.close();
+				  			driver.quit();
+				  			exit("all",log, strUserName,strFForderNumber,seqNo);
+				  			System.exit(0);
+				  			break;
+				  			}
+		  				}else{
+		  					blnFlag=false;
+		  					//break;
+		  				}
+		            }catch(Exception e){
+		            	// TODO Auto-generated catch block
+		                  // log.error("Something went wrong");
+		                   e.printStackTrace();
+		                   blnFlag=false;
+		                   }
+		    	   	}
+	
+		    
+		    try{
+		    	//	wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt("portlet2_iframe"));
+		    	waitTillElementIsPresent(driver, strDashboardDetails, intMaxWait);			
+				String[] arrMsg = readFile("./InputMessages/FinFortSoftwareTakeover.txt").split("#newLine#");
+		        String strMsg = "";
+		        newline=System.getProperty("line.separator");
+		        for(int intLoop = 0;intLoop<arrMsg.length;intLoop++){
+		        	if(strMsg==""){
+		        		strMsg =arrMsg[intLoop];
+		        		}else{
+		        			strMsg =strMsg + newline + arrMsg[intLoop];
+		        			}
+		        	}
+		        showPopup(strMsg,driver,log, strUserName, strFForderNumber, seqNo);
+		        
+		        
+				Click(driver, strClickViewBillsLink);
+				MDC.put("EventType","Click");
+				MDC.put("EventData","Success");
+				log.info("View Bills link clicked");
+				Click(driver, strClickGSMMobileLink);
+				MDC.put("EventType","Click");
+				MDC.put("EventData","Success");
+				log.info("GSM Mobile link clicked");
+				
+				List<WebElement> lst=driver.findElementsByXPath("//div[@id='multibilldetails']/div");
+				
+				for(int i=2;i<=lst.size();i++)
+				{
+					
+				Click(driver,"//div[@id='multibilldetails']/div["+i+"]");
+				
+				}
+				}catch(Exception e){
+					MDC.put("EventType","DataDownload");
+					MDC.put("EventData","Failure");
+					log.error("Data download is failed for BSNL: "+e.getMessage());
+					return false;
+					
+					}
+		    ImplicitWait(driver, 30000);
+		    return true;
+		    }
+		
+		public static boolean initiateBSNL(String strTo, String strFrom, String strCc, String strUserName, String subject, String SubjectPwd, String body, String bodyPwd, String strPasswordToZip, Logger log, String strFForderNumber,String strUserNAme,String strPhoneNumber,String seqNo) throws IOException, ParseException{
+			
+			JFrame jfrm =showPreLoader();
+			MDC.put("EventType", "WebsiteLogin");
+			MDC.put("EventData", "Success");
+			log.info("Logging in to the BSNL website");
+					
+			FirefoxDriver driver = initiate("BSNL",strloginurl,log,strUserName,strFForderNumber,seqNo);
+			String strBaseDir = Generic.getBase();
+			log.info("Navigated to BSNL url :"+strloginurl);		
+			driver.manage().deleteAllCookies();
+			JSONObject jObj = (JSONObject) readJSON("./InputData/datapullcfg.json").get("BasicInfo");
+			jObj = (JSONObject) readJSON("./InputData/datapullcfg.json").get("DriveConfig");
+			String strDriveBaseDir = jObj.get("driveBaseDir").toString();		
+			boolean dlUnsuccessful= false;
+			
+			try{
+				log.info("Started dlBSNLBill");
+				closePreLoader(jfrm);
+				waitTillElementIsPresent(driver, strLoginBtn, intMaxWait);
+				if(!dlBSNLBill(driver, strBaseDir,log, strUserName,  strFForderNumber,  seqNo)){
+					dlUnsuccessful=true;
+					BSNLLogOut(driver, log, strUserName,  strFForderNumber,  seqNo);
+					}
+				}catch(Exception e){
+					log.error("dlBSNLBill: "+e.getMessage());
+					dlUnsuccessful=true;
+					BSNLLogOut(driver, log, strUserNAme, strFForderNumber, seqNo);
+					}
+			
+			if(!dlUnsuccessful){
+				try{
+					
+					Thread.sleep(60000);
+					MDC.put("EventType", "ZipFileCreation");
+				    log.info("initiated zipFiles");
+					zipFiles(strBaseDir, "BSNL", strPasswordToZip);
+					MDC.put("EventData","Success");
+					log.info("Mail ZIP Password: "+strPasswordToZip);
+					}catch(Exception e){
+						MDC.put("EventData","Failure"+e.getMessage());
+						log.error("zipFiles: "+e.getMessage());
+						dlUnsuccessful=true;
+						BSNLLogOut(driver, log, strUserName,  strFForderNumber,  seqNo);
+						}
+				}
+				//send Mail to the Borrower Mail id	
+			if(!dlUnsuccessful){
+				try{
+					MDC.put("EventType", "EmailDownloadedFiles");
+					log.info("Initiated sendMail");
+					gMail.sendMessage(strUserName, strTo, strFrom, strCc,subject, body, strBaseDir + "/","BSNL.zip",log);
+					MDC.put("EventData","Success");
+					log.info("Mail sent successfully to "+strTo);
+					
+					}catch(Exception e){
+						MDC.put("EventData","Failure");
+						log.error("Fail to send Mail: "+e.getMessage());
+						dlUnsuccessful=true;
+						BSNLLogOut(driver, log, strUserName,  strFForderNumber,  seqNo);
+						}
+				}
+			
+			//Send  Password SMS or Mail
+			if(!dlUnsuccessful){
+				try{
+					MDC.put("EventType", "SendPassword");
+					MDC.put("EventData","Success");
+					jObj = (JSONObject) readJSON("./InputData/datapullcfg.json").get("MailConfig");
+					String strSenderId=jObj.get("passwordDeliveryMode").toString();
+					if(strSenderId.equalsIgnoreCase("Email")){
+						log.info("initiated Password Mail");
+						gMailAPI.gMail.sendMessage(strUserName, strTo, strFrom,strCc, SubjectPwd, bodyPwd, "", "",log);
+						MDC.put("EventData","Success");
+						log.info("Password: "+strPasswordToZip+" Mail sent Successfully to "+strTo);
+						System.out.println("Mail 2 Sent");
+						}else if(strSenderId.equalsIgnoreCase("SMS")){
+							log.info("initiated send SMS - password");
+							SendMailZippedPassword( strPhoneNumber, strUserNAme, "BSNL", strPasswordToZip);
+							MDC.put("EventData","Success");
+							log.info("Password: "+strPasswordToZip+" SMS sent successfully to"+strPhoneNumber);						
+							System.out.println("SMS password  Sent");
+							}else if(strSenderId.equalsIgnoreCase("BothEmailandSMS")){
+								log.info("initiated sendMail - password");
+								gMailAPI.gMail.sendMessage(strUserName, strTo, strFrom,strCc, SubjectPwd, bodyPwd, "", "",log);
+								MDC.put("EventData","Success");
+								log.info("Password: "+strPasswordToZip+" Mail sent Successfully to"+strTo);
+								System.out.println("Mail 2 Sent");
+								 
+								log.info("initiated send SMS - password");
+								SendMailZippedPassword(strPhoneNumber, strUserNAme, "BSNL", strPasswordToZip);
+								MDC.put("EventData","Success");
+								log.info("Password: "+strPasswordToZip+" SMS sent successfully to"+strPhoneNumber);	
+								System.out.println("SMS password  Sent");
+								}
+					}catch(Exception e){
+						MDC.put("EventType", "SendPassword");
+						MDC.put("EventData","Failure");
+						log.error("sendMail - failed: "+e.getMessage());
+						dlUnsuccessful=true;
+						}
+				}
+			
+			//Google drive Upload
+	if(!dlUnsuccessful){
+			try{
+				
+				MDC.put("EventType", "GoogleDriveUpload");
+				MDC.put("EventData", "Success");
+				log.info("Upload to google drive initiated. Name- FFOrder: "+strFForderNumber);
+				File fileToDelete = new File(strBaseDir + "/BSNL.zip");
+				deleteFolder(fileToDelete);
+				Drive service = gMail.getDriveService();
+				String strParentFolderID= null;
+				ArrayList arrList = new ArrayList();
+				String[] arrnew = strDriveBaseDir.toString().split("\\\\");
+
+				for(int k=0;k<arrnew.length;k++){
+					arrList.add(arrnew[k]);
+				}
+				arrList.add("FF Order# "+strFForderNumber);
+				arrList.add("PullSequenceNumber: "+seqNo);
+				arrList.add("BSNL");
+				String []arr = new String[arrList.size()];
+				arrList.toArray(arr);
+				String[] arrFolderID=gMail.createFoldersPath(arr).split("~");
+				strParentFolderID=arrFolderID[0];
+				String googleDrivePath=arrFolderID[1];
+				if(strParentFolderID!=(null)){
+					if(!uploadToDriveHierarchy(service, strBaseDir, strParentFolderID, log).equals("false")){
+						dlUnsuccessful= false;
+					}else{
+						dlUnsuccessful= true;
+					}
+				}
+				MDC.put("EventData", "Success");
+				log.info("File Uploaded to goole drive Successfully");
+
+			}catch(Exception e){
+				MDC.put("EventType", "GoogleDriveUpload");
+				MDC.put("EventData","Failure");
+				log.error("Failed to upload into google drive :"+e.getMessage());
+				dlUnsuccessful= true;
+			}
+	}
+			
+			if(!dlUnsuccessful){
+				try{
+					String newline = System.getProperty("line.separator");
+					String strMessage = "The system has successfully completed the downloads."+ newline+
+						"The system will be logged out.";
+					showPopup(strMessage);
+					BSNLLogOut(driver, log, strUserName,  strFForderNumber,  seqNo);
+					}catch(Exception e){
+						e.printStackTrace();
+						dlUnsuccessful=true;
+						log.error("Logout failed"+e.getMessage());
+						}
+				}
+			
+			//Capturing the screenshot
+			if(dlUnsuccessful){
+				try{
+					MDC.put("EventType", "CaptureScreenShot");
+					captureScreenshot(driver, strBaseDir+"./ErrorScreenshot/errBSNL.png");
+					MDC.put("EventData","Success");
+					log.info("Screenshot captured Successfully"+strBaseDir+"./ErrorScreenshot/errBSNL.png");
+					driver.close();
+					driver.quit();
+					if(!exit("BSNL",log,strUserName,strFForderNumber,seqNo)){
+						showPopup("System can't delete the files beacause the file is in use");
+						log.info("File couldn't be deleted");
+						SendCleanUpUnsuccessfulMail(strUserName, strFrom, strCc, strFForderNumber, seqNo, "BSNL",log);
+						dlUnsuccessful= true;
+					}
+					log.info("Exit BSNL");	
+
+				}catch(Exception e){
+					e.printStackTrace();
+					MDC.put("EventType", "CaptureScreenShot");
+					MDC.put("EventData","Failure");
+					log.error("Failed to take screenshot");
+					
+					if(!exit("BSNL",log,strUserName,strFForderNumber,seqNo)){
+						showPopup("The clean exit was unsuccessful as the files to be deleted are in use. Please close all the files and clear the download folder.");
+						log.info("File couldn't deleted");
+						SendCleanUpUnsuccessfulMail(strUserName, strFrom, strCc, strFForderNumber, seqNo, "ReliancePower",log);
+						dlUnsuccessful= true;
+					}
+					log.info("Exit BSNL");	
+				}
+			
+			}
+			
+			//Checking the status completed or Failed
+			jObj = (JSONObject) readJSON("./InputData/datapullcfg.json").get("BorrowerDetails");
+			String strFFProductCode = jObj.get("FFProductCode").toString();
+			if(!dlUnsuccessful){
+				MDC.put("EventType","Datapull");
+				MDC.put("EventData","Success");
+				log.info("datapull for BSNL is completed");
+				Generic.writeToPostbackJson("./OutPut/Postback.json", strFForderNumber,strFFProductCode,"BSNL",seqNo,googleDrivePath,"Success");
+			}else{
+				MDC.put("EventType","Datapull");
+				MDC.put("EventData","Failure");
+				log.info("datapull for BSNL is Failed");
+				Generic.writeToPostbackJson("./OutPut/Postback.json", strFForderNumber,strFFProductCode,"BSNL",seqNo,googleDrivePath,"Success");
+				}
+			return dlUnsuccessful;
+			}
+		
+		
+public static boolean BSNLLogOut(FirefoxDriver driver, Logger log,String strUserName, String strFForderNumber, String seqNo){
+			
+			MDC.put("EventType", "WebsiteLogout");
+			log.info("initiated logout");
+			boolean bStatus=false;
+			try{		
+				
+				ClickUsingJS(driver, strlogoutBtn);			
+				MDC.put("EventData","Success");
+				log.info("Clicked Logout button");
+				log.info("logged out successfully from "+strloginurl);
+				waitAftereLogout(driver);
+				exit("BSNL",log,strUserName,strFForderNumber,seqNo);
+				driver.close();
+				log.info("Exit BSNL");
+				bStatus=true;
+				
+			}catch(Exception e){
+				MDC.put("EventType", "WebsiteLogout");
+				MDC.put("EventData","Failure");
+				log.error("Failed to logout  From "+strloginurl+"+e.getMessage()");
+				e.printStackTrace();
+				bStatus=false;
+			}
+			return bStatus;
+			}
+	
+	
+}
+
+

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="create_run_jar" name="Create Jar for Project dataPullSw">
+
+	<property name="debuglevel" value="source,lines,vars"/>
+	<property name="target" value="1.7"/>
+	<property name="source" value="1.7"/>
+	
+	<property name ="destinationCompileSourceLocation" value="C:\Users\d070\Desktop\Datapull Runable Jars\9 july\Compiled"/>
+	<property name ="destinationJarLocation" value="C:\Users\d070\Desktop\Datapull Runable Jars\9 july"/>
+	
+	<target name="copyInputFolder" >
+		<copy todir="${destinationJarLocation}/InputData"><fileset dir="./InputData"/></copy>
+		<copy todir="${destinationJarLocation}/InputMessages"><fileset dir="./InputMessages"/></copy>		
+	</target>
+		
+	<target name="create_run_jar">
+	    <copy todir="${destinationCompileSourceLocation}"><fileset dir="./src/resources"/></copy>
+        <jar destfile="${destinationJarLocation}/datapull.jar" filesetmanifest="mergewithoutmain">
+            <manifest>
+                <attribute name="Main-Class" value="dataPullMain.dataPull"/>
+                <attribute name="Class-Path" value="."/>
+            </manifest>
+            <fileset dir="${destinationCompileSourceLocation}">
+           	</fileset>
+            	
+            <zipfileset excludes="META-INF/*.SF" src="./Jars/selenium-server-standalone-2.52.0.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="./Jars/google-api-client-1.20.0.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="./Jars/json-simple.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="./Jars/zip4j_1.3.2.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="./Jars/log4j-1.2.15.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="./Jars/mail.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="./Jars/httpasyncclient-4.0.2.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="./Jars/httpclient-4.3.6.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="./Jars/httpcore-osgi-4.3.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="./Jars/httpmime-4.3.6.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="./Jars/json-20140107.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="./Jars/unirest-java-1.4.9.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="./Jars/google-api-services-gmail-v1-rev29-1.20.0.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="./Jars/google-http-client-1.20.0.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="./Jars/google-http-client-jackson2-1.20.0.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="./Jars/google-oauth-client-1.20.0.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="./Jars/google-oauth-client-java6-1.20.0.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="./Jars/google-oauth-client-jetty-1.20.0.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="./Jars/guava-19.0-rc1.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="./Jars/jackson-0.8.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="./Jars/jetty-7.0.0.pre5.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="./Jars/jetty-util-7.0.0.pre5.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="./Jars/mail-1.4.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="./Jars/servlet-api-2.5.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="./Jars/com.fasterxml.jackson.core.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="./Jars/google-api-services-drive-v2-rev223-1.22.0.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="./Jars/logback-ext-loggly-0.1.4.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="./Jars/slf4j-api-1.7.21.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="./Jars/slf4j-log4j12-1.7.21.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="./Jars/log4j-papertrail-appender-1.0.jar"/>
+        </jar>
+    </target>
+	
+	<path id="dataPullSw.classpath">
+	        <pathelement location="${destinationCompileSourceLocation}"/>
+			<pathelement location="Jars/google-api-client-1.20.0.jar"/>
+	        <pathelement location="Jars/selenium-server-standalone-2.52.0.jar"/>
+	        <pathelement location="Jars/json-simple.jar"/>
+	        <pathelement location="Jars/zip4j_1.3.2.jar"/>
+	        <pathelement location="Jars/log4j-1.2.15.jar"/>
+	        <pathelement location="Jars/mail.jar"/>
+	        <pathelement location="Jars/httpasyncclient-4.0.2.jar"/>
+	        <pathelement location="Jars/httpclient-4.3.6.jar"/>
+	        <pathelement location="Jars/httpcore-osgi-4.3.jar"/>
+	        <pathelement location="Jars/httpmime-4.3.6.jar"/>
+	        <pathelement location="Jars/json-20140107.jar"/>
+	        <pathelement location="Jars/unirest-java-1.4.9.jar"/>
+	        <pathelement location="Jars/google-api-services-gmail-v1-rev29-1.20.0.jar"/>
+	        <pathelement location="Jars/google-http-client-1.20.0.jar"/>
+	        <pathelement location="Jars/google-http-client-jackson2-1.20.0.jar"/>
+	        <pathelement location="Jars/google-oauth-client-1.20.0.jar"/>
+	        <pathelement location="Jars/google-oauth-client-java6-1.20.0.jar"/>
+	        <pathelement location="Jars/google-oauth-client-jetty-1.20.0.jar"/>
+	        <pathelement location="Jars/guava-19.0-rc1.jar"/>
+	        <pathelement location="Jars/jackson-0.8.jar"/>
+	        <pathelement location="Jars/jetty-7.0.0.pre5.jar"/>
+	        <pathelement location="Jars/jetty-util-7.0.0.pre5.jar"/>
+	        <pathelement location="Jars/mail-1.4.jar"/>
+	        <pathelement location="Jars/servlet-api-2.5.jar"/>
+	        <pathelement location="Jars/com.fasterxml.jackson.core.jar"/>
+	        <pathelement location="Jars/google-api-services-drive-v2-rev223-1.22.0.jar"/>
+	        <pathelement location="Jars/logback-ext-loggly-0.1.4.jar"/>
+	        <pathelement location="Jars/slf4j-api-1.7.21.jar"/>
+	        <pathelement location="Jars/slf4j-log4j12-1.7.21.jar"/>
+	        <pathelement location="Jars/log4j-papertrail-appender-1.0.jar"/>
+	    </path>
+	
+	<target name="init">
+        <mkdir dir="${destinationCompileSourceLocation}"/>
+		<javac debug="true" debuglevel="${debuglevel}" destdir="${destinationCompileSourceLocation}" includeantruntime="false" source="${source}" target="${target}">
+            <src path="src"/>
+            <src path="src/resources"/>
+            <classpath refid="dataPullSw.classpath"/>
+        </javac>
+    </target>
+
+	<target name="clean">
+        <delete dir="${destinationCompileSourceLocation}"/>
+    </target>
+
+</project>
