@@ -3,7 +3,7 @@
 	"description": "Configuration File for Data Pulls",
 
 	"dataPullsOption": ["IncTax", "Vodafone", "ReliancePower","Mahadiscom","airtel","MTNL","BSNL","ReliancePostPaid","BSNLLandline","IdeaPostpaid","Best"],
-	"dataPullToRun": "IdeaPostpaid",
+	"dataPullToRun": "MTNL",
 
 	"IncTax": {
 		"ZoomInPercent": "120",
